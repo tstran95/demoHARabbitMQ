@@ -1,6 +1,6 @@
 package vnpay.vn.harabbit.controller;
 
-import org.springframework.stereotype.Controller;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +16,7 @@ import vnpay.vn.harabbit.service.AppService;
  */
 @RestController
 @RequestMapping("/api/v1/ha")
+@Slf4j
 public class AppController {
     private final AppService appService;
 
@@ -25,11 +26,14 @@ public class AppController {
 
     @PostMapping
     public ResponseApp sendMessage(@RequestBody RequestApp requestApp) {
+        log.info("Method sendMessage() START with request {}", requestApp);
         appService.sendMessage(requestApp.getMessage());
-        return ResponseApp.builder()
+        ResponseApp responseApp = ResponseApp.builder()
                 .code("01")
                 .message(requestApp.getMessage())
                 .description("OK")
                 .build();
+        log.info("Method sendMessage() END with response {}", responseApp);
+        return responseApp;
     }
 }
