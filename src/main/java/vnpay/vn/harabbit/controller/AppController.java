@@ -42,7 +42,7 @@ public class AppController {
                     .message(e.getMessage())
                     .description("FAIL")
                     .build();
-            log.info("Method sendMessage() ERROR with message ", e);
+            log.error("Method sendMessage() ERROR with message ", e);
         }
         return responseApp;
     }
