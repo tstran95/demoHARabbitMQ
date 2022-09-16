@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import vnpay.vn.harabbit.request.RequestApp;
 import vnpay.vn.harabbit.response.ResponseApp;
 import vnpay.vn.harabbit.service.AppService;
@@ -13,7 +14,7 @@ import vnpay.vn.harabbit.service.AppService;
  * Date:9/14/2022
  * Time:4:59 PM
  */
-@Controller
+@RestController
 @RequestMapping("/api/v1/ha")
 public class AppController {
     private final AppService appService;
@@ -25,7 +26,6 @@ public class AppController {
     @PostMapping
     public ResponseApp sendMessage(@RequestBody RequestApp requestApp) {
         appService.sendMessage(requestApp.getMessage());
-        System.out.println(requestApp.getMessage());
         return ResponseApp.builder()
                 .code("01")
                 .message(requestApp.getMessage())
