@@ -27,13 +27,23 @@ public class AppController {
     @PostMapping
     public ResponseApp sendMessage(@RequestBody RequestApp requestApp) {
         log.info("Method sendMessage() START with request {}", requestApp);
-        appService.sendMessage(requestApp.getMessage());
-        ResponseApp responseApp = ResponseApp.builder()
-                .code("01")
-                .message(requestApp.getMessage())
-                .description("OK")
-                .build();
-        log.info("Method sendMessage() END with response {}", responseApp);
+        ResponseApp responseApp;
+        try {
+            appService.sendMessage(requestApp.getMessage());
+            responseApp = ResponseApp.builder()
+                    .code("01")
+                    .message(requestApp.getMessage())
+                    .description("OK")
+                    .build();
+            log.info("Method sendMessage() END with response {}", responseApp);
+        }catch (Exception e) {
+            responseApp = ResponseApp.builder()
+                    .code("00")
+                    .message(e.getMessage())
+                    .description("FAIL")
+                    .build();
+            log.info("Method sendMessage() ERROR with message ", e);
+        }
         return responseApp;
     }
 }

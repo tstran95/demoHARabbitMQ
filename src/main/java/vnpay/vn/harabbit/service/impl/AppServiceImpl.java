@@ -21,10 +21,14 @@ public class AppServiceImpl implements AppService {
     @Override
     public void sendMessage(String message) {
         log.info("Method sendMessage() START with message {}", message);
-        rabbit.convertAndSend(
-                EXCHANGE,
-                "doesntmatter"
-                , message);
+        try {
+            rabbit.convertAndSend(
+                    EXCHANGE,
+                    "doesntmatter"
+                    , message);
+        }catch (Exception e) {
+            throw new RuntimeException("Cant connect to RabbitMQ server!!!!");
+        }
         log.info("Method sendMessage() END");
     }
 }

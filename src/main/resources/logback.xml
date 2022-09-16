@@ -82,7 +82,7 @@
 
     </appender>
 
-    <logger name="com.vn.deadletter">
+    <logger name="vnpay.vn.harabbit">
         <appender-ref ref="console"/>
     </logger>
 
