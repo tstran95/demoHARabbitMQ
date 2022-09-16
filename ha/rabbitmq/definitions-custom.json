@@ -6,8 +6,8 @@
       "tags": "none"
     },
     {
-      "name": "mike",
-      "password": "mike",
+      "name": "sontt",
+      "password": "sontt",
       "tags": "administrator"
     }
   ],
@@ -25,7 +25,7 @@
       "read": ".*"
     },
     {
-      "user": "mike",
+      "user": "sontt",
       "vhost": "/",
       "configure": ".*",
       "write": ".*",
@@ -41,7 +41,7 @@
       "pattern":"^.*",
       "definition": {
         "ha-mode":"exactly",
-        "ha-params":2,
+        "ha-params":10,
         "ha-sync-mode":"automatic"
       }
     }
@@ -50,7 +50,7 @@
     {
       "name": "custom.myexchange1",
       "vhost": "/",
-      "type": "fanout",
+      "type": "direct",
       "durable": true,
       "auto_delete": false,
       "internal": false,
@@ -75,7 +75,7 @@
       "vhost": "/",
       "destination": "custom.myqueue1",
       "destination_type": "queue",
-      "routing_key": "test123",
+      "routing_key": "doesntmatter",
       "arguments": {}
     }
   ]

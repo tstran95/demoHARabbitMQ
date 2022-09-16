@@ -32,6 +32,18 @@ services:
       - "15700:15672"
     networks:
       - rmq
+    
+  rabbitmq3:
+    build: rabbitmq/.
+    environment:
+      - RABBITMQ_CONFIG_FILE=/etc/rabbitmq/rabbitmq-custom
+      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit log [{console,[{level,debug}]}] -setcookie myCookieSecretXCBSDFASDGASFG
+      - RABBITMQ_NODENAME=rabbit@rabbitmq3
+    ports:
+      - "5800:5672"
+      - "15800:15672"
+    networks:
+      - rmq
 
 networks:
   rmq:
