@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import vnpay.vn.harabbit.request.RequestApp;
 import vnpay.vn.harabbit.response.ResponseApp;
 import vnpay.vn.harabbit.service.AppService;
+import vnpay.vn.harabbit.utils.Constant;
 
 /**
  * @author sontt1
@@ -31,16 +32,16 @@ public class AppController {
         try {
             appService.sendMessage(requestApp.getMessage());
             responseApp = ResponseApp.builder()
-                    .code("01")
+                    .code(Constant.SUCCESS_CODE)
                     .message(requestApp.getMessage())
-                    .description("OK")
+                    .description(Constant.SUCCESS)
                     .build();
             log.info("Method sendMessage() END with response {}", responseApp);
         }catch (Exception e) {
             responseApp = ResponseApp.builder()
-                    .code("00")
+                    .code(Constant.FAIL_CODE)
                     .message(e.getMessage())
-                    .description("FAIL")
+                    .description(Constant.FAIL)
                     .build();
             log.error("Method sendMessage() ERROR with message ", e);
         }

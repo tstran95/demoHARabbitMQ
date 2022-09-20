@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import vnpay.vn.harabbit.service.AppService;
+import vnpay.vn.harabbit.utils.Constant;
 
 /**
  * @author sontt1
@@ -16,18 +17,18 @@ import vnpay.vn.harabbit.service.AppService;
 @Slf4j
 public class AppServiceImpl implements AppService {
     private final RabbitTemplate rabbit;
-    private final static String EXCHANGE = "custom.myexchange1";
 
     @Override
     public void sendMessage(String message) {
         log.info("Method sendMessage() START with message {}", message);
         try {
             rabbit.convertAndSend(
-                    EXCHANGE,
-                    "doesntmatter"
-                    , message);
-        }catch (Exception e) {
-            throw new RuntimeException("Cant connect to RabbitMQ server!!!!");
+                    Constant.EXCHANGE,
+                    Constant.ROUTING_KEY,
+                    message);
+        } catch (Exception e) {
+            log.error("Method sendMessage() ERROR with message ", e);
+            throw new RuntimeException(Constant.CONNECT_RABBIT_ERROR);
         }
         log.info("Method sendMessage() END");
     }
