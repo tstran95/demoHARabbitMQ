@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vnpay.vn.harabbit.consumer.DirectExchangeConsumer;
+import vnpay.vn.harabbit.producer.DirectExchangeProducer;
 import vnpay.vn.harabbit.request.RequestApp;
 import vnpay.vn.harabbit.response.ResponseApp;
 import vnpay.vn.harabbit.service.AppService;
@@ -20,17 +22,24 @@ import vnpay.vn.harabbit.utils.Constant;
 @Slf4j
 public class AppController {
     private final AppService appService;
+    private final DirectExchangeConsumer exchangeConsumer;
+    private final DirectExchangeProducer exchangeProducer;
 
-    public AppController(AppService appService) {
+
+    public AppController(AppService appService, DirectExchangeConsumer exchangeConsumer, DirectExchangeProducer exchangeProducer) {
         this.appService = appService;
+        this.exchangeConsumer = exchangeConsumer;
+        this.exchangeProducer = exchangeProducer;
     }
 
-    @PostMapping
+    @PostMapping("/prod")
     public ResponseApp sendMessage(@RequestBody RequestApp requestApp) {
         log.info("Method sendMessage() START with request {}", requestApp);
         ResponseApp responseApp;
         try {
-            appService.sendMessage(requestApp.getMessage());
+//            appService.sendMessage(requestApp.getMessage());
+            exchangeProducer.start();
+            exchangeProducer.send(Constant.EXCHANGE , requestApp.getMessage(), Constant.ROUTING_KEY);
             responseApp = ResponseApp.builder()
                     .code(Constant.SUCCESS_CODE)
                     .message(requestApp.getMessage())
@@ -44,6 +53,29 @@ public class AppController {
                     .description(Constant.FAIL)
                     .build();
             log.error("Method sendMessage() ERROR with message ", e);
+        }
+        return responseApp;
+    }
+    @PostMapping("/cons")
+    public ResponseApp receiveMessage() {
+        log.info("Method receiveMessage() START");
+        ResponseApp responseApp;
+        try {
+            exchangeConsumer.start();
+            String message = exchangeConsumer.subscribe();
+            responseApp = ResponseApp.builder()
+                    .code(Constant.SUCCESS_CODE)
+                    .message(message)
+                    .description(Constant.SUCCESS)
+                    .build();
+            log.info("Method receiveMessage() END with response {}", responseApp);
+        }catch (Exception e) {
+            responseApp = ResponseApp.builder()
+                    .code(Constant.FAIL_CODE)
+                    .message(e.getMessage())
+                    .description(Constant.FAIL)
+                    .build();
+            log.error("Method receiveMessage() ERROR with message ", e);
         }
         return responseApp;
     }
