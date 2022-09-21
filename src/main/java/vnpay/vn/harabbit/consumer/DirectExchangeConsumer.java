@@ -18,9 +18,8 @@ public class DirectExchangeConsumer {
         // Create channel
         channel = new ExchangeChannelFactory();
 
-        // Create topic exchange
+        // Create direct exchange
         channel.declareExchange(BuiltinExchangeType.DIRECT, Constant.EXCHANGE);
-
         // Create queues
         channel.declareQueues(Constant.QUEUE);
 

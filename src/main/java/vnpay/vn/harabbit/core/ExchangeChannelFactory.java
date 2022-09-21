@@ -12,8 +12,9 @@ import java.util.Objects;
 public class ExchangeChannelFactory {
     private static Channel channel;
 
-    public ExchangeChannelFactory() throws IOException {
+    public ExchangeChannelFactory() {
         if (Objects.isNull(channel)) {
+            log.info("CREATE NEW CHANNEL");
             ChannelPool channelPool = new ChannelPool();
             channel = channelPool.getChannel();
         }
