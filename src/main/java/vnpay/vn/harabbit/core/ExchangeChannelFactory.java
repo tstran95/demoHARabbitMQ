@@ -26,6 +26,17 @@ public class ExchangeChannelFactory {
     public void declareExchange(BuiltinExchangeType exchangeType, String... exchangeNames) throws IOException {
         log.info("method declareExchange() START with exchangeNames {}", (Object) exchangeNames);
         for (String exchangeName : exchangeNames) {
+//            Map<String, Object> args = new HashMap<>();
+//            args.put("alternate-exchange", Constant.EXCHANGE);
+            // exchangeDeclare( exchange, builtinExchangeType, durable)
+            channel.exchangeDeclare(exchangeName, exchangeType, true);
+        }
+        log.info("method declareExchange() END");
+    }
+
+    public void declareExchangeWithAlterExchange(BuiltinExchangeType exchangeType, String... exchangeNames) throws IOException {
+        log.info("method declareExchange() START with exchangeNames {}", (Object) exchangeNames);
+        for (String exchangeName : exchangeNames) {
             Map<String, Object> args = new HashMap<>();
             args.put("alternate-exchange", Constant.EXCHANGE);
             // exchangeDeclare( exchange, builtinExchangeType, durable)

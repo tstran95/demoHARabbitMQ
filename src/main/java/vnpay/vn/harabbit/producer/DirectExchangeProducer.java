@@ -20,12 +20,17 @@ public class DirectExchangeProducer {
 
         // Create direct exchange
         channel.declareExchange(BuiltinExchangeType.DIRECT, Constant.EXCHANGE);
+        channel.declareExchangeWithAlterExchange(BuiltinExchangeType.DIRECT, Constant.ALTER_EXCHANGE);
         // Create queues
         channel.declareQueues(Constant.QUEUE);
+        channel.declareQueues(Constant.ALTER_QUEUE);
 
         // Binding queues
         channel.performQueueBinding(Constant.EXCHANGE,
                 Constant.QUEUE,
+                Constant.ROUTING_KEY);
+        channel.performQueueBinding(Constant.ALTER_EXCHANGE,
+                Constant.ALTER_QUEUE,
                 Constant.ROUTING_KEY);
         log.info("DirectExchangeProducer method start() END");
     }
