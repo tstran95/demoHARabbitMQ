@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @Slf4j
@@ -33,8 +35,10 @@ public class ExchangeChannelFactory {
     public void declareQueues(String... queueNames) throws IOException {
         log.info("method declareQueues() START with queueNames {}", (Object) queueNames);
         for (String queueName : queueNames) {
+            Map<String, Object> args = new HashMap<>();
+            args.put("x-queue-type", "quorum");
             // queueDeclare  - (queueName, durable, exclusive, autoDelete, arguments)
-            channel.queueDeclare(queueName, true, false, false, null);
+            channel.queueDeclare(queueName, true, false, false, args);
         }
         log.info("method declareQueues() END");
     }
