@@ -3,6 +3,7 @@ package vnpay.vn.harabbit.core;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
+import vnpay.vn.harabbit.constant.Constant;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -25,8 +26,10 @@ public class ExchangeChannelFactory {
     public void declareExchange(BuiltinExchangeType exchangeType, String... exchangeNames) throws IOException {
         log.info("method declareExchange() START with exchangeNames {}", (Object) exchangeNames);
         for (String exchangeName : exchangeNames) {
+            Map<String, Object> args = new HashMap<>();
+            args.put("alternate-exchange", Constant.EXCHANGE);
             // exchangeDeclare( exchange, builtinExchangeType, durable)
-            channel.exchangeDeclare(exchangeName, exchangeType, true);
+            channel.exchangeDeclare(exchangeName, exchangeType, true , false , args);
         }
         log.info("method declareExchange() END");
     }
@@ -35,10 +38,10 @@ public class ExchangeChannelFactory {
     public void declareQueues(String... queueNames) throws IOException {
         log.info("method declareQueues() START with queueNames {}", (Object) queueNames);
         for (String queueName : queueNames) {
-            Map<String, Object> args = new HashMap<>();
-            args.put("x-queue-type", "quorum");
+//            Map<String, Object> args = new HashMap<>();
+//            args.put("x-queue-type", "quorum");
             // queueDeclare  - (queueName, durable, exclusive, autoDelete, arguments)
-            channel.queueDeclare(queueName, true, false, false, args);
+            channel.queueDeclare(queueName, true, false, false, null);
         }
         log.info("method declareQueues() END");
     }
