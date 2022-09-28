@@ -22,7 +22,7 @@ import vnpay.vn.harabbit.constant.Constant;
 public class RabbitConfig {
     @Bean
     Queue queue() {
-        return new Queue(Constant.QUEUE, false);
+        return new Queue(Constant.QUEUE, true , false , false);
     }
 
     @Bean
