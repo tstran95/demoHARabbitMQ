@@ -37,9 +37,9 @@ public class AppController {
         log.info("Method sendMessage() START with request {}", requestApp);
         ResponseApp responseApp;
         try {
-//            appService.sendMessage(requestApp.getMessage());
-            exchangeProducer.start();
-            exchangeProducer.send(Constant.EXCHANGE , requestApp.getMessage(), Constant.ROUTING_KEY);
+            appService.sendMessage(requestApp.getMessage());
+//            exchangeProducer.start();
+//            exchangeProducer.send(Constant.EXCHANGE , requestApp.getMessage(), Constant.ROUTING_KEY);
             responseApp = ResponseApp.builder()
                     .code(Constant.SUCCESS_CODE)
                     .message(requestApp.getMessage())
