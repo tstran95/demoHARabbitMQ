@@ -8,6 +8,7 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import vnpay.vn.harabbit.constant.Constant;
 
 /**
@@ -15,6 +16,7 @@ import vnpay.vn.harabbit.constant.Constant;
  * Date:9/28/2022
  * Time:9:55 AM
  */
+@Configuration
 public class RabbitConfig {
     static final String topicExchangeName = Constant.EXCHANGE;
 
