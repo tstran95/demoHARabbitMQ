@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import vnpay.vn.harabbit.constant.Constant;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author sontt1
  * Date:9/28/2022
@@ -22,7 +25,9 @@ import vnpay.vn.harabbit.constant.Constant;
 public class RabbitConfig {
     @Bean
     Queue queue() {
-        return new Queue(Constant.QUEUE, true , false , false);
+        Map<String, Object> args = new HashMap<>();
+        args.put("x-queue-type", "quorum");
+        return new Queue(Constant.QUEUE, true , false , false , args);
     }
 
     @Bean
