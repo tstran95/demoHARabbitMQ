@@ -14,36 +14,6 @@ import vnpay.vn.harabbit.constant.Constant;
 
 @SpringBootApplication
 public class DemoHaRabbitMqApplication {
-
-    static final String topicExchangeName = Constant.EXCHANGE;
-
-    static final String queueName = Constant.QUEUE;
-
-    @Bean
-    Queue queue() {
-        return new Queue(queueName, false);
-    }
-
-    @Bean
-    DirectExchange exchange() {
-        return new DirectExchange(topicExchangeName);
-    }
-
-    @Bean
-    Binding binding(Queue queue, DirectExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(Constant.ROUTING_KEY);
-    }
-
-    @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
-                                             MessageListenerAdapter listenerAdapter) {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory);
-        container.setQueueNames(queueName);
-        container.setMessageListener(listenerAdapter);
-        return container;
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(DemoHaRabbitMqApplication.class, args);
     }
