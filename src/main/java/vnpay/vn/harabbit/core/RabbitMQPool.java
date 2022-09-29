@@ -61,12 +61,14 @@ public class RabbitMQPool {
      * @return @throws Exception
      */
     public Channel borrowChannel() throws Exception {
+        log.info("Method borrowChannel() START");
         if (null == pool) {
             return null;
         }
         Channel channel;
         try {
             channel = pool.borrowObject();
+            log.info("Method borrowChannel() END");
         } catch (IllegalStateException ex) {
             log.error("BorrowChannel have ex: ", ex);
             checkConnectionAndChannelPool();
