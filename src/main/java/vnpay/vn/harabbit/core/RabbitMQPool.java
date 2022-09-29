@@ -69,7 +69,7 @@ public class RabbitMQPool {
         try {
             channel = pool.borrowObject();
             log.info("Method borrowChannel() END");
-        } catch (IllegalStateException ex) {
+        } catch (Exception ex) {
             log.error("BorrowChannel have ex: ", ex);
             checkConnectionAndChannelPool();
             channel = pool.borrowObject();
