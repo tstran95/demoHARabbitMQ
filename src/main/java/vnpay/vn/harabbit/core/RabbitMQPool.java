@@ -63,6 +63,7 @@ public class RabbitMQPool {
     public Channel borrowChannel() throws Exception {
         log.info("Method borrowChannel() START");
         if (null == pool) {
+            log.info("Method borrowChannel() null");
             return null;
         }
         Channel channel;
