@@ -88,7 +88,9 @@ public class RabbitMQPool {
      *
      */
     private synchronized void checkConnectionAndChannelPool() throws IOException {
+        log.info("Method checkConnectionAndChannelPool() START");
         if (null != pool) {
+            log.info("Method checkConnectionAndChannelPool() Running with pool not null");
             try {
                 pool.close();
                 pool = null;
