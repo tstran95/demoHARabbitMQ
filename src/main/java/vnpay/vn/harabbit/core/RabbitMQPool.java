@@ -69,7 +69,6 @@ public class RabbitMQPool {
         Channel channel;
         try {
             channel = pool.borrowObject();
-            log.info("Method borrowChannel() END");
         } catch (Exception ex) {
             log.error("BorrowChannel have ex: ", ex);
             checkConnectionAndChannelPool();
@@ -81,6 +80,7 @@ public class RabbitMQPool {
             checkConnectionAndChannelPool();
             channel = pool.borrowObject();
         }
+        log.info("Method borrowChannel() END");
         return channel;
     }
 
