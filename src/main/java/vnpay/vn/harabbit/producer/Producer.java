@@ -111,6 +111,7 @@ public class Producer {
                 log.info("End send message false by cannot borrow channel from pool.");
                 return false;
             }
+            log.info("Running with chanel: {}", channel);
             //create exchange
             // exchangeDeclare( exchange, builtinExchangeType, durable)
             channel.exchangeDeclare(Constant.EXCHANGE, BuiltinExchangeType.DIRECT, true);
