@@ -39,7 +39,7 @@ public class AppController {
         ResponseApp responseApp;
         try {
             Producer producer = Producer.getInstance();
-            producer.sendToExchange(receiveMessage().getMessage());
+            producer.sendToExchange(requestApp.getMessage());
 //            appService.sendMessage(requestApp.getMessage());
 //            exchangeProducer.start();
 //            exchangeProducer.send(Constant.EXCHANGE , requestApp.getMessage(), Constant.ROUTING_KEY);
