@@ -1,10 +1,14 @@
 package vnpay.vn.harabbit.producer;
 
 import com.rabbitmq.client.AMQP;
+import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import vnpay.vn.harabbit.constant.Constant;
 import vnpay.vn.harabbit.core.RabbitMQPool;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -107,6 +111,20 @@ public class Producer {
                 log.info("End send message false by cannot borrow channel from pool.");
                 return false;
             }
+            //create exchange
+            // exchangeDeclare( exchange, builtinExchangeType, durable)
+            channel.exchangeDeclare(Constant.EXCHANGE, BuiltinExchangeType.DIRECT, true);
+
+            //create queue
+            Map<String, Object> args = new HashMap<>();
+            args.put("x-queue-type", "quorum");
+            // queueDeclare  - (queueName, durable, exclusive, autoDelete, arguments)
+            channel.queueDeclare(Constant.QUEUE, true, false, false, args);
+
+            //binding
+            channel.queueBind(Constant.QUEUE, Constant.EXCHANGE, Constant.ROUTING_KEY);
+
+            //publish
             channel.basicPublish(Constant.EXCHANGE, Constant.ROUTING_KEY, null, message.getBytes("UTF-8"));
             log.info("End send message success to exchangeName: {}", Constant.EXCHANGE);
             return true;

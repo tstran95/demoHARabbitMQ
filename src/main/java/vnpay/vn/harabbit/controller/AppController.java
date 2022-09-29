@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vnpay.vn.harabbit.consumer.DirectExchangeConsumer;
 import vnpay.vn.harabbit.producer.DirectExchangeProducer;
+import vnpay.vn.harabbit.producer.Producer;
 import vnpay.vn.harabbit.request.RequestApp;
 import vnpay.vn.harabbit.response.ResponseApp;
 import vnpay.vn.harabbit.service.AppService;
@@ -37,7 +38,9 @@ public class AppController {
         log.info("Method sendMessage() START with request {}", requestApp);
         ResponseApp responseApp;
         try {
-            appService.sendMessage(requestApp.getMessage());
+            Producer producer = Producer.getInstance();
+            producer.sendToExchange(receiveMessage().getMessage());
+//            appService.sendMessage(requestApp.getMessage());
 //            exchangeProducer.start();
 //            exchangeProducer.send(Constant.EXCHANGE , requestApp.getMessage(), Constant.ROUTING_KEY);
             responseApp = ResponseApp.builder()

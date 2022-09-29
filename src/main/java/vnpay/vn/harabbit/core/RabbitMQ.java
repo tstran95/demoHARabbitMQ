@@ -46,9 +46,13 @@ public class RabbitMQ {
         try {
 //            Address[] address = genAddress();
             factory = new ConnectionFactory();
-            factory.setPort(rabbitMqBean.getPort());
-            factory.setUsername(rabbitMqBean.getUsername());
-            factory.setPassword(rabbitMqBean.getPassword());
+//            factory.setPort(rabbitMqBean.getPort());
+//            factory.setUsername(rabbitMqBean.getUsername());
+//            factory.setPassword(rabbitMqBean.getPassword());
+            factory.setPort(5000);
+            factory.setHost("localhost");
+            factory.setUsername("sontt");
+            factory.setPassword("sontt");
             factory.setAutomaticRecoveryEnabled(true);
             factory.setRequestedHeartbeat(45);
             factory.setConnectionTimeout(60000);
