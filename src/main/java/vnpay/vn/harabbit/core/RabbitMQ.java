@@ -55,7 +55,7 @@ public class RabbitMQ {
             factory.setAutomaticRecoveryEnabled(true);
             factory.setRequestedHeartbeat(45);
             factory.setConnectionTimeout(60000);
-//            connection = factory.newConnection(address);
+            connection = factory.newConnection();
             log.info("Connect success to RabbitMQ ");
             return true;
         } catch (Exception e) {
