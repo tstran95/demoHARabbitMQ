@@ -53,8 +53,8 @@ public class RabbitMQ {
             factory.setUsername("sontt");
             factory.setPassword("sontt");
             factory.setAutomaticRecoveryEnabled(true);
-            factory.setRequestedHeartbeat(45);
-            factory.setConnectionTimeout(60000);
+//            factory.setRequestedHeartbeat(45);
+//            factory.setConnectionTimeout(60000);
             connection = factory.newConnection();
             log.info("Connect success to RabbitMQ ");
             return true;
