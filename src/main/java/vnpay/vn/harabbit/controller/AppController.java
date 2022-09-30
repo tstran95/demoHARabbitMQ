@@ -40,8 +40,6 @@ public class AppController {
         log.info("Method sendMessage() START with request {}", requestApp);
         ResponseApp responseApp;
         try {
-            RabbitMQ.getInstance().getConnection();
-            RabbitMQPool.getInstance().start();
             Producer.getInstance().sendToExchange(requestApp.getMessage());
 //            appService.sendMessage(requestApp.getMessage());
 //            exchangeProducer.start();

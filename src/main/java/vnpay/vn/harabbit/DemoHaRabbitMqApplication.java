@@ -1,20 +1,15 @@
 package vnpay.vn.harabbit;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
-import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import vnpay.vn.harabbit.constant.Constant;
+import vnpay.vn.harabbit.core.RabbitMQ;
+import vnpay.vn.harabbit.core.RabbitMQPool;
 
 @SpringBootApplication
 public class DemoHaRabbitMqApplication {
     public static void main(String[] args) {
+        RabbitMQ.getInstance().getConnection();
+        RabbitMQPool.getInstance().start();
         SpringApplication.run(DemoHaRabbitMqApplication.class, args);
     }
 
