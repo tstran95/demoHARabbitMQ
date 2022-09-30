@@ -256,10 +256,19 @@ public class Producer {
                 log.info("End send message false by cannot borrow channel from pool.");
                 return false;
             }
-//            AMQP.BasicProperties props = new AMQP.BasicProperties.Builder()
-//                    .correlationId(correlationId)
-//                    .replyTo(replyExchangeName)
-//                    .build();
+            //create exchange
+            // exchangeDeclare( exchange, builtinExchangeType, durable)
+            channel.exchangeDeclare(Constant.EXCHANGE, BuiltinExchangeType.DIRECT, true);
+
+            //create queue
+//            Map<String, Object> args = new HashMap<>();
+//            args.put("x-queue-type", "quorum");
+            // queueDeclare  - (queueName, durable, exclusive, autoDelete, arguments)
+            channel.queueDeclare(Constant.QUEUE, true, false, false, null);
+
+            //binding
+            channel.queueBind(Constant.QUEUE, Constant.EXCHANGE, Constant.ROUTING_KEY);
+
             channel.basicPublish(Constant.EXCHANGE, Constant.ROUTING_KEY, null, message.getBytes("UTF-8"));
             log.info("End send message success to exchangeName: {}", Constant.EXCHANGE);
             return true;
