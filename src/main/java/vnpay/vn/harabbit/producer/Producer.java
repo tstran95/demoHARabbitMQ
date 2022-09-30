@@ -261,8 +261,8 @@ public class Producer {
             channel.exchangeDeclare(Constant.EXCHANGE, BuiltinExchangeType.DIRECT, true);
 
             //create queue
-//            Map<String, Object> args = new HashMap<>();
-//            args.put("x-queue-type", "quorum");
+            Map<String, Object> args = new HashMap<>();
+            args.put("x-queue-type", "quorum");
             // queueDeclare  - (queueName, durable, exclusive, autoDelete, arguments)
             channel.queueDeclare(Constant.QUEUE, true, false, false, null);
 
