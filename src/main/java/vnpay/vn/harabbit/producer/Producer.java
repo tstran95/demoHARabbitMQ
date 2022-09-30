@@ -136,7 +136,7 @@ public class Producer {
             Map<String, Object> args = new HashMap<>();
             args.put("x-queue-type", "quorum");
             // queueDeclare  - (queueName, durable, exclusive, autoDelete, arguments)
-            channel.queueDeclare(Constant.QUEUE, true, false, false, null);
+            channel.queueDeclare(Constant.QUEUE, true, false, false, args);
 
             //binding
             channel.queueBind(Constant.QUEUE, Constant.EXCHANGE, Constant.ROUTING_KEY);
