@@ -130,18 +130,18 @@ public class Producer {
             }
             //create exchange
             // exchangeDeclare( exchange, builtinExchangeType, durable)
-//            channel.exchangeDeclare(Constant.EXCHANGE, BuiltinExchangeType.DIRECT, true);
+            channel.exchangeDeclare(Constant.EXCHANGE, BuiltinExchangeType.DIRECT, true);
 
-//            //create queue
-//            Map<String, Object> args = new HashMap<>();
-//            args.put("x-queue-type", "quorum");
-//            // queueDeclare  - (queueName, durable, exclusive, autoDelete, arguments)
-//            channel.queueDeclare(Constant.QUEUE, true, false, false, args);
+            //create queue
+            Map<String, Object> args = new HashMap<>();
+            args.put("x-queue-type", "quorum");
+            // queueDeclare  - (queueName, durable, exclusive, autoDelete, arguments)
+            channel.queueDeclare(Constant.QUEUE, true, false, false, args);
 
+            //binding
+            channel.queueBind(Constant.QUEUE, Constant.EXCHANGE, Constant.ROUTING_KEY);
 
             channel.basicPublish(Constant.EXCHANGE, Constant.ROUTING_KEY, null, message.getBytes("UTF-8"));
-//            //binding
-//            channel.queueBind(Constant.QUEUE, Constant.EXCHANGE, Constant.ROUTING_KEY);
             log.info("End send message success to exchangeName: {}", Constant.EXCHANGE);
             return true;
         } catch (Exception ex) {
