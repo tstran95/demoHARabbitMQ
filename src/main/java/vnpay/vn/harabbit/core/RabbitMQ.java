@@ -47,8 +47,6 @@ public class RabbitMQ {
                                 new Address("172.19.0.3" , 5_000),
                                 new Address("172.19.0.2" , 5_000)};
             factory = new ConnectionFactory();
-//            factory.setPort(5000);
-//            factory.setHost("localhost");
             factory.setUsername("sontt");
             factory.setPassword("sontt");
             factory.setAutomaticRecoveryEnabled(true);
