@@ -139,7 +139,7 @@ public class Producer {
             channel.queueDeclare(Constant.QUEUE, true, false, false, args);
 
             //binding
-            channel.queueBind(Constant.QUEUE, Constant.EXCHANGE, Constant.ROUTING_KEY);
+//            channel.queueBind(Constant.QUEUE, Constant.EXCHANGE, Constant.ROUTING_KEY);
 
             channel.basicPublish(Constant.EXCHANGE, Constant.ROUTING_KEY, null, message.getBytes("UTF-8"));
             log.info("End send message success to exchangeName: {}", Constant.EXCHANGE);
