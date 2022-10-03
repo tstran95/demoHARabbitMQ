@@ -43,12 +43,10 @@ public class RabbitMQ {
      */
     public boolean openConnection() {
         try {
-            Address[] address = {new Address("localhost" , 5_000)};
-//            Address[] address = genAddress();
+            Address[] address = {new Address("rabbitmq1" , 5_000) ,
+                                new Address("rabbitmq2" , 5_000),
+                                new Address("rabbitmq3" , 5_000)};
             factory = new ConnectionFactory();
-//            factory.setPort(rabbitMqBean.getPort());
-//            factory.setUsername(rabbitMqBean.getUsername());
-//            factory.setPassword(rabbitMqBean.getPassword());
 //            factory.setPort(5000);
 //            factory.setHost("localhost");
             factory.setUsername("sontt");
