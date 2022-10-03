@@ -43,6 +43,7 @@ public class RabbitMQ {
      */
     public boolean openConnection() {
         try {
+            Address[] address = {new Address("localhost" , 500)};
 //            Address[] address = genAddress();
             factory = new ConnectionFactory();
 //            factory.setPort(rabbitMqBean.getPort());
@@ -55,7 +56,7 @@ public class RabbitMQ {
             factory.setAutomaticRecoveryEnabled(true);
             factory.setRequestedHeartbeat(45);
             factory.setConnectionTimeout(60000);
-            connection = factory.newConnection();
+            connection = factory.newConnection(address);
             log.info("Connect success to RabbitMQ ");
             return true;
         } catch (Exception e) {
