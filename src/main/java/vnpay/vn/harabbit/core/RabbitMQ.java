@@ -43,9 +43,9 @@ public class RabbitMQ {
      */
     public boolean openConnection() {
         try {
-            Address[] address = {new Address("172.19.0.5" , 5_000) ,
-                                new Address("172.19.0.3" , 5_000),
-                                new Address("172.19.0.2" , 5_000)};
+            Address[] address = {new Address("172.19.0.5" , 5672) ,
+                                new Address("172.19.0.3" , 5672),
+                                new Address("172.19.0.2" , 5672)};
             factory = new ConnectionFactory();
             factory.setUsername("sontt");
             factory.setPassword("sontt");
