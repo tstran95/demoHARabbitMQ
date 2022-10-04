@@ -40,8 +40,8 @@ public class AppController {
         log.info("Method sendMessage() START with request {}", requestApp);
         ResponseApp responseApp;
         try {
-//            Producer.getInstance().sendToExchange(requestApp.getMessage());
-            appService.sendMessage(requestApp.getMessage());
+            Producer.getInstance().sendToExchange(requestApp.getMessage());
+//            appService.sendMessage(requestApp.getMessage());
 //            exchangeProducer.start();
 //            exchangeProducer.send(Constant.EXCHANGE , requestApp.getMessage(), Constant.ROUTING_KEY);
             responseApp = ResponseApp.builder()
