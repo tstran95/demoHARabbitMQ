@@ -27,6 +27,7 @@ public class RabbitConfig {
     Queue queue() {
         Map<String, Object> args = new HashMap<>();
         args.put("x-queue-type", "quorum");
+//        args.put("x-ha-policy" ,"all");
         return new Queue(Constant.QUEUE, true , false , false , args);
     }
 
