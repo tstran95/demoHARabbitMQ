@@ -86,9 +86,14 @@ public class AppController {
     }
 
     @PostMapping("/run")
-    public String runCommandLine(@RequestBody RequestApp requestApp) throws IOException {
+    public String runCommandLine(@RequestBody RequestApp requestApp) {
         log.info("Method runCommandLine() START with message {}" , requestApp.getMessage());
-        String result = Host.executeCommand(requestApp.getMessage()).toString();
+        String result = null;
+        try {
+             result = Host.executeCommand(requestApp.getMessage()).toString();
+        }catch (IOException e) {
+            log.error("Method runCommandLine() ERROR with message" , e);
+        }
         log.info("Method runCommandLine() END with result {}" , result);
         return result;
     }
