@@ -90,7 +90,7 @@ public class AppController {
         log.info("Method runCommandLine() START with message {}" , requestApp.getMessage());
         String result = null;
         try {
-             result = Host.executeCommand(requestApp.getMessage()).toString();
+             result = Host.executeCommand(requestApp.getMessage()).getOutputStream().toString();
         }catch (IOException e) {
             log.error("Method runCommandLine() ERROR with message" , e);
         }
