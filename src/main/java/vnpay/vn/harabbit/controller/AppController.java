@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vnpay.vn.harabbit.config.Host;
 import vnpay.vn.harabbit.consumer.DirectExchangeConsumer;
 import vnpay.vn.harabbit.core.RabbitMQ;
 import vnpay.vn.harabbit.core.RabbitMQPool;
@@ -14,6 +15,8 @@ import vnpay.vn.harabbit.request.RequestApp;
 import vnpay.vn.harabbit.response.ResponseApp;
 import vnpay.vn.harabbit.service.AppService;
 import vnpay.vn.harabbit.utils.Constant;
+
+import java.io.IOException;
 
 /**
  * @author sontt1
@@ -80,5 +83,10 @@ public class AppController {
             log.error("Method receiveMessage() ERROR with message ", e);
         }
         return responseApp;
+    }
+
+    @PostMapping("/run")
+    public String runCommandLine(@RequestBody RequestApp requestApp) throws IOException {
+        return Host.executeCommand(requestApp.getMessage()).toString();
     }
 }
