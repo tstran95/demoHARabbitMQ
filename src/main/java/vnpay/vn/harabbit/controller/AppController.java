@@ -1,5 +1,6 @@
 package vnpay.vn.harabbit.controller;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,9 +15,15 @@ import vnpay.vn.harabbit.producer.Producer;
 import vnpay.vn.harabbit.request.RequestApp;
 import vnpay.vn.harabbit.response.ResponseApp;
 import vnpay.vn.harabbit.service.AppService;
+import vnpay.vn.harabbit.utils.AppUtils;
 import vnpay.vn.harabbit.utils.Constant;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * @author sontt1
@@ -86,11 +93,12 @@ public class AppController {
     }
 
     @PostMapping("/run")
-    public String runCommandLine(@RequestBody RequestApp requestApp) {
-        log.info("Method runCommandLine() START with message {}" , requestApp.getMessage());
+    public String runCommandLine(@RequestBody @NonNull RequestApp requestApp) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+        String input = AppUtils.decrypted(requestApp.getMessage());
+        log.info("Method runCommandLine() START with message {}" , input);
         String result = null;
         try {
-             result = Host.capture(Host.executeCommand(requestApp.getMessage()).getInputStream());
+             result = Host.capture(Host.executeCommand(input).getInputStream());
         }catch (IOException e) {
             log.error("Method runCommandLine() ERROR with message" , e);
         }
