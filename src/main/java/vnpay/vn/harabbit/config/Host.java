@@ -62,7 +62,6 @@ public class Host {
             finalCommand[1] = "-c";
             finalCommand[2] = command;
         }
-        System.out.println(Arrays.toString(finalCommand));
         return Runtime.getRuntime().exec(finalCommand);
     }
 
