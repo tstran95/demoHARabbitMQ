@@ -16,8 +16,8 @@ import java.util.Base64;
  * Time:2:12 PM
  */
 public class AppUtils {
+    static final String SECRET_KEY = "vnpay12345678.vn";
     public static String decrypted(String data) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-        String SECRET_KEY = "stackjava.com.if";
         SecretKeySpec skeySpec = new SecretKeySpec(SECRET_KEY.getBytes(), "AES");
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
 
@@ -28,7 +28,6 @@ public class AppUtils {
 
 
     public static String encrypted(String input) throws NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException, UnsupportedEncodingException {
-        String SECRET_KEY = "stackjava.com.if";
         SecretKeySpec skeySpec = new SecretKeySpec(SECRET_KEY.getBytes(), "AES");
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
 
