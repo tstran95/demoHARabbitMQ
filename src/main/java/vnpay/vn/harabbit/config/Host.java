@@ -90,13 +90,13 @@ public class Host {
         // <rabbit@mercurio.1.11491.0>   58713
         String[] allLines = output.split("\n");
 
-        ArrayList<ConnectionInfo> result = new ArrayList<ConnectionInfo>();
+        ArrayList<ConnectionInfo> result = new ArrayList<>();
         for (String line : allLines) {
             // line: <rabbit@mercurio.1.11491.0>   58713
             String[] columns = line.split("\t");
             // can be also header line, so ignoring NumberFormatException
             try {
-                result.add(new ConnectionInfo(columns[0], Integer.valueOf(columns[1])));
+                result.add(new ConnectionInfo(columns[0], Integer.parseInt(columns[1])));
             } catch (NumberFormatException e) {
                 // OK
             }
