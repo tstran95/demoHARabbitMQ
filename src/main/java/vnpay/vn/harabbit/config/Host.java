@@ -67,6 +67,7 @@ public class Host {
     }
 
     public static Process rabbitmqctl(String command) throws IOException {
+        System.out.println(rabbitmqctlCommand());
         return executeCommand(rabbitmqctlCommand() + " " + command);
     }
 
