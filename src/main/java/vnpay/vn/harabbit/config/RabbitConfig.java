@@ -26,9 +26,9 @@ public class RabbitConfig {
     @Bean
     Queue queue() {
         Map<String, Object> args = new HashMap<>();
-        args.put("x-queue-type", "quorum");
+//        args.put("x-queue-type", "quorum");
 //        args.put("x-ha-policy" ,"all");
-        return new Queue(Constant.QUEUE, true , false , false , args);
+        return new Queue(Constant.QUEUE, true , false , false , null);
     }
 
     @Bean
