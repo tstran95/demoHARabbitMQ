@@ -50,8 +50,8 @@ public class AppController {
         log.info("Method sendMessage() START with request {}", requestApp);
         ResponseApp responseApp;
         try {
-            Producer.getInstance().sendToExchange(requestApp.getMessage());
-//            appService.sendMessage(requestApp.getMessage());
+//            Producer.getInstance().sendToExchange(requestApp.getMessage());
+            appService.sendMessage(requestApp.getMessage());
             responseApp = ResponseApp.builder()
                     .code(Constant.SUCCESS_CODE)
                     .message(requestApp.getMessage())
