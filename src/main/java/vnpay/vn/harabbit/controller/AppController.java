@@ -24,7 +24,6 @@ import javax.crypto.NoSuchPaddingException;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.UUID;
 
 /**
  * @author sontt1
@@ -49,7 +48,6 @@ public class AppController {
     @PostMapping("/prod")
     public ResponseApp sendMessage(@RequestBody RequestApp requestApp) {
         log.info("Method sendMessage() START with request {}", requestApp);
-        String token = UUID.randomUUID().toString();
         ResponseApp responseApp;
         try {
             Producer.getInstance().sendToExchange(requestApp.getMessage());
@@ -59,7 +57,7 @@ public class AppController {
                     .message(requestApp.getMessage())
                     .description(Constant.SUCCESS)
                     .build();
-            log.info("Method sendMessage() END with token {}", token);
+            log.info("Method sendMessage() END with response {}", responseApp);
         }catch (Exception e) {
             responseApp = ResponseApp.builder()
                     .code(Constant.FAIL_CODE)
