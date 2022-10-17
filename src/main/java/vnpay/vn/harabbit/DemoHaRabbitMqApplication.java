@@ -8,8 +8,8 @@ import vnpay.vn.harabbit.core.RabbitMQPool;
 @SpringBootApplication
 public class DemoHaRabbitMqApplication {
     public static void main(String[] args) {
-        RabbitMQ.getInstance().getConnection();
-        RabbitMQPool.getInstance().start();
+//        RabbitMQ.getInstance().getConnection();
+//        RabbitMQPool.getInstance().start();
         SpringApplication.run(DemoHaRabbitMqApplication.class, args);
     }
 
