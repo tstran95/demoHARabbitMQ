@@ -43,17 +43,18 @@ public class RabbitMQ {
      */
     public boolean openConnection() {
         try {
-            Address[] address = {new Address("172.19.0.5" , 5672) ,
-                                new Address("172.19.0.3" , 5672),
-                                new Address("172.19.0.2" , 5672)};
+            Address[] address = {new Address("10.22.18.35" , 5672) ,
+                    new Address("10.22.18.36" , 5672),
+                    new Address("10.22.18.37" , 5672)};
             factory = new ConnectionFactory();
-            factory.setUsername("sontt");
-            factory.setPassword("sontt");
+            factory.setVirtualHost("rabbit-test");
+            factory.setUsername("rabbit-test");
+            factory.setPassword("rabbit-test");
+            factory.setPort(5672);
             factory.setAutomaticRecoveryEnabled(true);
             factory.setRequestedHeartbeat(45);
             factory.setConnectionTimeout(60000);
             connection = factory.newConnection(address);
-            log.info("Connect success to RabbitMQ ");
             return true;
         } catch (Exception e) {
             log.error("Connection to RabbitMQ have ex", e);

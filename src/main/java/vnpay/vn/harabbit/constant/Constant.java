@@ -4,11 +4,14 @@ public class Constant {
     public static final String HOST = "localhost";
     public static final int RETRY_DELAY = 60000;
 
-    public static final String EXCHANGE = "custom.myexchange1";
-    public static final String ALTER_EXCHANGE = "custom.myalterexchange1";
+    public static final String EXCHANGE = "custom.myexchange";
+    public static final String EXCHANGE_1 = "custom.myexchange1";
+    public static final String ALTER_EXCHANGE = "custom.myalterexchange";
     public static final String ROUTING_KEY = "doesntmatter";
+    public static final String ROUTING_KEY_1 = "doesntmatter1";
     public static final String QUEUE = "custom.myqueue";
-    public static final String ALTER_QUEUE = "custom.myalterqueue1";
+    public static final String QUEUE_1 = "custom.myqueue1";
+    public static final String ALTER_QUEUE = "custom.myalterqueue";
     public static final String QUEUE_NAME = "mainQueue";
     public static final String DEAD_LETTER_EXCHANGE_NAME = "DeadLetterExchange";
     public static final String DEAD_LETTER_QUEUE_NAME = "retryQueue";
